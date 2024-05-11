@@ -31,3 +31,15 @@ jobs:
     - name: Run Python
       run: |
         python3 ./main.py
+    - name: Move output JSON file to repository
+      run: |
+        mv output.json $GITHUB_WORKSPACE/output.json
+      if: success()
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'Your Name'
+        git config --global user.email 'youremail@example.com'
+        git add output.json
+        git commit -m "Add output JSON file"
+        git push
